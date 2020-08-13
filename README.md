@@ -1,1 +1,2 @@
-# SOP optimization with SA, GRASP, Tabu Search
+# SOP optimization
+Solving SOP with SA, GRASP, Tabu Search algorithms.
