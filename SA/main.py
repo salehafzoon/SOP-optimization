@@ -1,32 +1,31 @@
-import tsplib95
+import matplotlib.pyplot as plt
+from random import randrange
 from pprint import pprint
 import random as rn
+import numpy as np
+import tsplib95
+import openpyxl
 import math
 import copy
-from random import randrange
-import matplotlib.pyplot as plt
 import time
-import numpy as np
-import openpyxl
 import os
-
 
 LINEAR = 'linear'
 LOG = 'logarithmic'
 EXP = 'exponential'
 
+INIT_HEURISTIC = True
+NUM_ITERATIONS = 500
+dependencies = []
+EPSILON = 1e-323
+TEMP_MODE = EXP
+DEBUG = False
+graph = None
 START_T = 1
 T = START_T
 ALPHA = 0.9
-TEMP_MODE = EXP
-INIT_HEURISTIC = True
-NUM_ITERATIONS = 500
-DEBUG = False
-EPSILON = 1e-323
-graph = None
-dependencies = []
 
-EXEl_WRITE = False
+EXCEl_WRITE = False
 
 class Edge(object):
 
@@ -273,18 +272,21 @@ def printResult(answers):
     maxAns = max(answers, key=lambda t: t[1])
     variance = round(math.sqrt(np.var([ans[1]for ans in answers])) , 3)
 
+    print("-------------------")
     print("\nbest[0:10]=", minAns[0][0:10], "\tmin cost:", minAns[1])
     print("worst[0:10]=", maxAns[0][0:10], "\tmax cost:",
           max(answers, key=lambda t: t[1])[1])
     print("\naverage cost:", sum(ans[1] for ans in answers)/len(answers))
-    print("\nvariance of costs:", variance)
+    print("variance of costs:", variance)
 
     print("\nmin time:", min(answers, key=lambda t: t[2])[2])
     print("avg time:", str(sum(float(ans[2])
                                for ans in answers)/len(answers))[0:6])
     print("max time:", max(answers, key=lambda t: t[2])[2])
+    print("-------------------")
+    
 
-def writeResultToExel(file_name, answers, myRow):
+def writeResultToExcel(file_name, answers, myRow):
     minCost = min(answers, key=lambda t: t[1])[1]
     maxCost = max(answers, key=lambda t: t[1])[1]
     avgCost = sum(ans[1] for ans in answers)/len(answers)
@@ -294,7 +296,7 @@ def writeResultToExel(file_name, answers, myRow):
     maxTime = max(answers, key=lambda t: t[2])[2]
     avgTime = str(sum(float(ans[2])for ans in answers)/len(answers))[0:6]
 
-    wbkName = 'Results.xlsx'
+    wbkName = './SA/Results.xlsx'
     wbk = openpyxl.load_workbook(wbkName)
     for wks in wbk.worksheets:
         myCol = 4
@@ -313,46 +315,34 @@ def writeResultToExel(file_name, answers, myRow):
     wbk.save(wbkName)
     wbk.close
 
-def plotResult(costs):
-
-    plt.plot(list(range(len(costs))), costs, '-', color="blue",
-             label='algorithm progress', linewidth=2)
-    plt.show()
-
-def plotBoxDiagram(answers):
-    costs = [ans[1] for ans in answers]
-    plt.boxplot(costs)
-    plt.show()
 
 if __name__ == '__main__':
 
-    myRow = 50
-    # for root, directories, filenames in os.walk("instances/H"):
-    #     for filename in filenames:
-    #         file = os.path.join(root, filename)
-    #         problem = tsplib95.load_problem(str(file))
-    problem = tsplib95.load_problem("instances/M/R.200.100.1.sop")
+    myRow = 2
+    for root, directories, filenames in os.walk("./instances/H"):
+        for filename in filenames:
+            file = os.path.join(root, filename)
+            problem = tsplib95.load_problem(str(file))
 
-    graph = Graph(problem)
-    dependencies = calculateDependencies(problem)
-    answers = []
+            graph = Graph(problem)
+            dependencies = calculateDependencies(problem)
+            answers = []
 
-    print("\ninstance:", problem.name, "\tTEMP_MODE:",
-        TEMP_MODE, "\tALPHA:", ALPHA, "\n")
+            print("\ninstance:", problem.name, "\tTEMP_MODE:",
+                TEMP_MODE, "\tALPHA:", ALPHA, "\n")
 
-    for _ in range(10):
-        start = time.time()
+            for _ in range(10):
+                start = time.time()
 
-        state, cost, states, costs = annealing(problem,random_start, cost_function, get_neighbour,
-                                                acceptance_probability, updateTemperature, NUM_ITERATIONS, DEBUG)
-        
-        duration = str(time.time() - start)[0:6]
-        print('time:',duration , "cost:",cost)
-        answers.append((state, cost, duration))
+                state, cost, states, costs = annealing(problem,random_start, cost_function, get_neighbour,
+                                                        acceptance_probability, updateTemperature, NUM_ITERATIONS, DEBUG)
+                
+                duration = str(time.time() - start)[0:6]
+                print('time:',duration , "\tcost:",cost)
+                answers.append((state, cost, duration))
 
-    printResult(answers)
-    plotBoxDiagram(answers)
+            printResult(answers)
 
-    if EXEl_WRITE:
-        writeResultToExel(filename, answers, myRow)
-        myRow += 1
+            if EXCEl_WRITE:
+                writeResultToExcel(filename, answers, myRow)
+                myRow += 1

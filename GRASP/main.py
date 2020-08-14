@@ -1,22 +1,22 @@
-import tsplib95
+import matplotlib.pyplot as plt
+from random import randrange
 from pprint import pprint
 import random as rnd
+import numpy as np
+import statistics 
+import openpyxl
+import tsplib95
 import math
 import copy
-from random import randrange
-import matplotlib.pyplot as plt
 import time
-import openpyxl
 import os
-import statistics 
-import numpy as np
 
-ALPHA = 0.02
 NUM_ITERATIONS = 500
-DEBUG = False
-graph = None
-EXEl_WRITE = False
+EXCEl_WRITE = False
 dependencies = []
+DEBUG = False
+ALPHA = 0.02
+graph = None
 
 
 class Edge(object):
@@ -27,9 +27,7 @@ class Edge(object):
 
     def __str__(self):
         return str(self.vertices) + "->" + str(self.weight)
-        # return str(self.weight)
-        # return str(self.vertices)
-
+        
     def __repr__(self):
         return str(self)
 
@@ -187,7 +185,6 @@ def constructGreadyRandSol(graph, deps):
 
             # random manner : select from ALPHA best of candidates
             # (rank based selection)
-            # index = int(ALPHA * graph.dimension)
             index = int(rnd.uniform(0, ALPHA) * graph.dimension)
             dest = rnd.choice(list(candidates[0:1+index]))[0]
             solution.append(dest)
@@ -252,42 +249,27 @@ def GRASP(problem, constructGreadyRandSol, costFunction, localSearch,
     return bestSolution, history
 
 
-def plotResult(costs):
-    
-    plt.plot(list(range(len(costs))), costs, '-', color="gray",
-             label='algorithm progress', linewidth=1.5)
-    plt.xlabel('best solution')
-    plt.ylabel('iteration')
-    plt.show()
-
-def plotResultPerALPHA(alphas,costs):
-    
-    print("alphas:",alphas,"costs:",costs)
-    plt.plot(alphas, costs, '-', color="gray",
-             label='algorithm progress', linewidth=1.5)
-    plt.xlabel('AlPHA')
-    plt.ylabel('average cost')
-    plt.show()
-
 def printResult(answers):
 
     minAns = min(answers, key=lambda t: t[1])
     maxAns = max(answers, key=lambda t: t[1])
     variance = math.sqrt(np.var([ans[1] for ans in answers]))
     
+    print("-------------------")
     print("\nbest[0:10]=", minAns[0][0:10], "\tmin cost:", minAns[1])
     print("worst[0:10]=", maxAns[0][0:10], "\tmax cost:",
           max(answers, key=lambda t: t[1])[1])
     print("\naverage cost:", sum(ans[1] for ans in answers)/len(answers))
-    print("\nvariance of costs:", variance)
+    print("variance of costs:", variance)
 
     print("\nmin time:", min(answers, key=lambda t: t[2])[2])
     print("avg time:", str(sum(float(ans[2])
                                for ans in answers)/len(answers))[0:6])
     print("max time:", max(answers, key=lambda t: t[2])[2])
+    print("-------------------")
+    
 
-
-def writeResultToExel(file_name, answers, myRow):
+def writeResultToExcel(file_name, answers, myRow):
     minCost = min(answers, key=lambda t: t[1])[1]
     maxCost = max(answers, key=lambda t: t[1])[1]
     avgCost = sum(ans[1] for ans in answers)/len(answers)
@@ -297,7 +279,7 @@ def writeResultToExel(file_name, answers, myRow):
     maxTime = max(answers, key=lambda t: t[2])[2]
     avgTime = str(sum(float(ans[2])for ans in answers)/len(answers))[0:6]
 
-    wbkName = 'Results.xlsx'
+    wbkName = './GRASP/Results.xlsx'
     wbk = openpyxl.load_workbook(wbkName)
     for wks in wbk.worksheets:
         myCol = 4
@@ -316,39 +298,34 @@ def writeResultToExel(file_name, answers, myRow):
     wbk.save(wbkName)
     wbk.close
 
-def plotBoxDiagram(answers):
-    costs = [ans[1] for ans in answers]
-    plt.boxplot(costs)
-    plt.show()
 
 if __name__ == '__main__':
 
     myRow = 2
-    # for root, directories, filenames in os.walk("instances/"):
-    #     for filename in filenames:
-    #         file = os.path.join(root, filename)
-    #         problem = tsplib95.load_problem(str(file))
-    problem = tsplib95.load_problem("instances/M/R.200.100.1.sop")
-
-    graph = Graph(problem)
-    dependencies = calculateDependencies(problem)
-    print("\ninstance:", problem.name, "ALPHA:", ALPHA, "\n")
-
-    answers = []
+    for root, directories, filenames in os.walk("./instances/"):
+        for filename in filenames:
+            file = os.path.join(root, filename)
+            problem = tsplib95.load_problem(str(file))
     
-    for i in range(10):
-        start = time.time()
+            graph = Graph(problem)
+            dependencies = calculateDependencies(problem)
+            print("\ninstance:", problem.name, "ALPHA:", ALPHA, "\n")
 
-        (state, cost), history = GRASP(problem, constructGreadyRandSol,
-                                        costFunction, localSearch, NUM_ITERATIONS, DEBUG)
+            answers = []
+            
+            for i in range(10):
+                start = time.time()
 
-        
-        duration = str(time.time() - start)[0:6]
-        answers.append((state, cost, duration))
-        print('time:',duration , "cost:",cost)
+                (state, cost), history = GRASP(problem, constructGreadyRandSol,
+                                                costFunction, localSearch, NUM_ITERATIONS, DEBUG)
 
-    printResult(answers)
-    plotBoxDiagram(answers)           
-    if EXEl_WRITE:
-        writeResultToExel(filename, answers, myRow)
-        myRow += 1
+                
+                duration = str(time.time() - start)[0:6]
+                answers.append((state, cost, duration))
+                print('time:',duration , "\tcost:",cost)
+
+            printResult(answers)
+            
+            if EXCEl_WRITE:
+                writeResultToExcel(filename, answers, myRow)
+                myRow += 1
