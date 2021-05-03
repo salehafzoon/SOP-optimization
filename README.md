@@ -32,14 +32,17 @@ All the algorithms are designed base on the **Lexicographic Search** using **for
   <img src="./photos/3-exchange.png" width="75%">
 </div>
 
+## Running
+Just go to related algorithm directory and run the python code. example:
+```
+$ cd ./SA
+$ python main.py
+```
+
+<div align="center">
 <img src="https://github.com/salehafzoon/SOP-optimization/blob/master/photos/sample%20runing.gif" width="60%" height="50%"/>
+</div>
 
-
-```
-$ cd Assignment-01/external/glfw-3.0.3
-$ cmake .
-```
-![alt text](https://github.com/inessadl/readme/blob/master/img/ff_logo2013.png)
 
 
 ## References
