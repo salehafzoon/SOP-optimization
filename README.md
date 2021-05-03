@@ -42,16 +42,11 @@ Just go to related algorithm directory and run the python code. example:
  python main.py
 ```
 
-<div align="center">
-<img src="https://github.com/salehafzoon/SOP-optimization/blob/master/photos/sample%20runing.gif" width="60%" height="50%"/>
-</div>
-
 ## Results
-All results and comparing analyse are presented in **Report.pdf** files.
+All results and comparing analyze are presented in **Report.pdf** files.
 overal algorithms comparisons result is as follow:
 <div align="center">
   <img src="./photos/pic3.PNG" width="70%">
-  <img src="./photos/pic4.PNG" width="70%">
 </div>
 
 ## References
