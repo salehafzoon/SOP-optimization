@@ -29,8 +29,7 @@ python implementation
 All the algorithms are designed base on the **Lexicographic Search** using **forwarding and back warding path-preserving-3-exchange** as explained in [An Ant Colony System Hybridized with a New Local Search for the Sequential Ordering Problem paper](http://people.idsia.ch/~luca/fd18cc00a0_article.pdf).
 
 <div align="center">
-  <img src="./photos/SOP-img1.PNG" width="330px">
-  <img src="./photos/SOP-img2.PNG" width="310px">
+  <img src="./photos/3-exchange.png" width="75%">
 </div>
 
 <img src="https://github.com/salehafzoon/SOP-optimization/blob/master/photos/sample%20runing.gif" width="60%" height="50%"/>
