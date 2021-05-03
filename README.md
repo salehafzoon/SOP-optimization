@@ -6,7 +6,6 @@ Solving SOP with SA, GRASP, Tabu Search algorithms.
 The Sequential Ordering Problem **(SOP)** with precedence constraints consists of finding a minimum weight Hamiltonian path on a directed graph with weights on the arcs and on the   nodes, subject to precedence constraints among nodes.
 
 <div align="center">
-  <img src="./photos/SOP-img1.PNG" width="350px">
   <img src="./photos/SOP-img2.PNG" width="310px">
 </div>
 
