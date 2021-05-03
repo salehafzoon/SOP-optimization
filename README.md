@@ -45,9 +45,6 @@ Just go to related algorithm directory and run the python code. example:
 ## Results
 All results and comparing analyze are presented in **Report.pdf** files.
 overal algorithms comparisons result is as follow:
-<div align="center">
-  <img src="./photos/pic3.PNG" width="70%">
-</div>
 
 + ### SA 
 
