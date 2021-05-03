@@ -2,6 +2,9 @@
 
 Solving SOP with SA, GRASP, Tabu Search algorithms.
 
+> python implemented 
+[![Python 3.9.4](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+
 ## Problem Description
 The Sequential Ordering Problem **(SOP)** with precedence constraints consists of finding a minimum weight Hamiltonian path on a directed graph with weights on the arcs and on the   nodes, subject to precedence constraints among nodes.
 
@@ -35,17 +38,22 @@ All the algorithms are designed base on the **Lexicographic Search** using **for
 ## Running
 Just go to related algorithm directory and run the python code. example:
 ```
-$ cd ./SA
-$ python main.py
+ cd ./SA
+ python main.py
 ```
 
 <div align="center">
 <img src="https://github.com/salehafzoon/SOP-optimization/blob/master/photos/sample%20runing.gif" width="60%" height="50%"/>
 </div>
 
-
+## Results
+All results and comparing analyse are presented in **Report.pdf** files.
+overal algorithms comparisons result is as follow:
+<div align="center">
+  <img src="./photos/pic3.PNG" width="70%">
+  <img src="./photos/pic4.PNG" width="70%">
+</div>
 
 ## References
-OpenGL Tutorials. *Tutorial 1: Opening a Window*, Available at [Link to the paper](http://www.opengl-tutorial.org/beginners-tutorials/tutorial-1-opening-a-window/) (Accessed: 3rd April 2016).
-
-SOP images srouce => The paper : [Tree search algorithms for the Sequential Ordering Problem](https://arxiv.org/pdf/1911.12427.pdf)
+- An Ant Colony System Hybridized with a New Local Search for the Sequential Ordering Problem paper [Link to the paper](http://people.idsia.ch/~luca/fd18cc00a0_article.pdf).
+- SOP images srouce => The paper : [Tree search algorithms for the Sequential Ordering Problem](https://arxiv.org/pdf/1911.12427.pdf)
