@@ -6,7 +6,7 @@ Solving SOP with SA, GRASP, Tabu Search algorithms.
 The Sequential Ordering Problem **(SOP)** with precedence constraints consists of finding a minimum weight Hamiltonian path on a directed graph with weights on the arcs and on the   nodes, subject to precedence constraints among nodes.
 
 <div align="center">
-  <img src="./photos/SOP-img1.PNG" width="340px">
+  <img src="./photos/SOP-img1.PNG" width="330px">
   <img src="./photos/SOP-img2.PNG" width="310px">
 </div>
 
@@ -26,7 +26,12 @@ python implementation
 
 ## Algorithms
 
-All the algorithms are designed base on the related paper idea as (An Ant Colony System Hybridized with a New Local Search for the Sequential Ordering Problem).
+All the algorithms are designed base on the **Lexicographic Search** using **forwarding and back warding path-preserving-3-exchange** as explained in [An Ant Colony System Hybridized with a New Local Search for the Sequential Ordering Problem paper](http://people.idsia.ch/~luca/fd18cc00a0_article.pdf).
+
+<div align="center">
+  <img src="./photos/SOP-img1.PNG" width="330px">
+  <img src="./photos/SOP-img2.PNG" width="310px">
+</div>
 
 <img src="https://github.com/salehafzoon/SOP-optimization/blob/master/photos/sample%20runing.gif" width="60%" height="50%"/>
 
