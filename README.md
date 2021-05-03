@@ -49,6 +49,31 @@ overal algorithms comparisons result is as follow:
   <img src="./photos/pic3.PNG" width="70%">
 </div>
 
++ ### SA 
+
+    | Instance | BKS | best | average | worst | avg_time |
+    | :---     |:---:| ---: | ---:    | ---:  | ---:     |
+    | ESC78.sop | 18230 | 18250 | 18400.5 | 18400.5 | 1.7924 |
+    | susan.260.158.sop | 1016 | 1123 | 1128.8| 1136 | 8.6370|
+    | R.200.100.1.sop | 61 | 340 | 402.3| 453 | 28.773 |
+
++ ### GRASP
+
+    | Instance | BKS | best | average | worst | avg_time |
+    | :---     |:---:| ---: | ---:    | ---:  | ---:     |
+    | ESC78.sop | 18230 | 20405 | 20895 | 21220 | 3.8190 |
+    | susan.260.158.sop | 1016 | 1123 | 1128.8| 1136 | 8.6370|
+    | R.200.100.1.sop | 61 | 393 | 448.7| 483 | 56.704 |
+
++ ### Tabu search
+
+    | Instance | BKS | best | average | worst | avg_time |
+    | :---     |:---:| ---: | ---:    | ---:  | ---:     |
+    | ESC78.sop | 18230 | 18515 | 18967.5 | 19325 | 1.8291 |
+    | susan.260.158.sop |1016| 1043 | 1061.7 | 1078| 1.3065 |
+    | R.200.100.1.sop | 61 | 489 | 595.5| 651 | 27.902 |
+    
+
 ## References
 - An Ant Colony System Hybridized with a New Local Search for the Sequential Ordering Problem paper [Link to the paper](http://people.idsia.ch/~luca/fd18cc00a0_article.pdf).
 - SOP images srouce => The paper : [Tree search algorithms for the Sequential Ordering Problem](https://arxiv.org/pdf/1911.12427.pdf)
