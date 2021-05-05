@@ -3,7 +3,7 @@
 Solving SOP with SA, GRASP, Tabu Search algorithms.
 
 > python implemented 
-[![Python 3.9.4](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python 3.9.4](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 
 ## Problem Description
 The Sequential Ordering Problem **(SOP)** with precedence constraints consists of finding a minimum weight Hamiltonian path on a directed graph with weights on the arcs and on the   nodes, subject to precedence constraints among nodes.
